@@ -1,16 +1,34 @@
 # coin_flutter
 
-A new Flutter project.
-
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Dependencies
 
-A few resources to get you started if this is your first Flutter project:
+* mockito [link](https://pub.dev/packages/mockito)
+* build_runner [link](https://pub.dev/packages/build_runner)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Commands
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Run tests:
+
+```shell
+flutter test
+```
+
+Build runner:
+
+```shell
+dart run build_runner build
+```
+
+Build runner (watch):
+
+```shell
+dart run build_runner watch
+```
+
+Get dependencies:
+
+```shell
+flutter pub get
+```

@@ -1,22 +1,21 @@
-import 'package:coin_flutter/domain/models/Trending.dart';
-import 'package:coin_flutter/domain/usecases/search_trending_coins.dart';
+import 'package:coin_flutter/domain/models/trending.dart';
+import 'package:coin_flutter/domain/usecases/get_trending_coins.dart';
 import 'package:mockito/mockito.dart';
-import 'package:coin_flutter/domain/repositories/coin_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockCoinRepository extends Mock implements CoinRepository {}
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late SearchTrendingCoins searchTrendingCoins;
+  late GetTrendingCoinsUseCase getTrendingCoins;
   late MockCoinRepository mockCoinRepository;
 
   setUp(() {
     mockCoinRepository = MockCoinRepository();
-    searchTrendingCoins = SearchTrendingCoins(mockCoinRepository);
+    getTrendingCoins = GetTrendingCoinsUseCase(mockCoinRepository);
   });
 
-  final tCoinsList = [
-    Trending(
+  final testCoinsList = [
+    const Trending(
       id: "biconomy",
       coinId: 21061,
       name: "Biconomy",
@@ -30,7 +29,7 @@ void main() {
           "https://assets.coingecko.com/coins/images/21061/large/biconomy_logo.jpg?1696520444",
       slug: "biconomy",
     ),
-    Trending(
+    const Trending(
       id: "telos",
       coinId: 7588,
       name: "Telos",
@@ -47,16 +46,16 @@ void main() {
   ];
 
   test('should get trending coins from the repository successful', () async {
-    // Arrange
-    when(mockCoinRepository.searchTrending())
-        .thenAnswer((_) async => tCoinsList);
+    // arrange
+    when(mockCoinRepository.getTrendingCoins())
+        .thenAnswer((_) async => testCoinsList);
 
-    // Act
-    final result = await searchTrendingCoins();
+    // act
+    final result = await getTrendingCoins.execute();
 
-    // Assert
-    expect(result, tCoinsList);
-    verify(mockCoinRepository.searchTrending());
+    // assert
+    expect(result, testCoinsList);
+    verify(mockCoinRepository.getTrendingCoins());
     verifyNoMoreInteractions(mockCoinRepository);
   });
 }
