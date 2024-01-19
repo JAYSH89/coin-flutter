@@ -4,14 +4,13 @@ import 'package:coin_flutter/core/constants/constants.dart';
 import 'package:coin_flutter/core/errors/server_exception.dart';
 import 'package:coin_flutter/data/models/trending/trending_response_dto.dart';
 import 'package:http/http.dart' as http;
-import 'package:coin_flutter/data/models/trending/trending_coin_dto.dart';
 
 import 'coin_remote_data_source.dart';
 
 class CoinRemoteDataSourceImpl implements CoinRemoteDataSource {
-  CoinRemoteDataSourceImpl({required this.client});
-
   final http.Client client;
+
+  CoinRemoteDataSourceImpl({required this.client});
 
   @override
   Future<TrendingResponseDTO> searchTrending() async {

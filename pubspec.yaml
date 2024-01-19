@@ -1,5 +1,5 @@
 name: coin_flutter
-description: A new Flutter project.
+description: A very coiny flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -39,6 +39,10 @@ dependencies:
   freezed_annotation: ^2.4.1
   http: ^1.1.0
   equatable: ^2.0.5
+  flutter_bloc: ^8.1.3
+  bloc_test: ^9.1.5
+  rxdart: ^0.27.7
+  get_it: ^7.6.7
 
 dev_dependencies:
   flutter_test:

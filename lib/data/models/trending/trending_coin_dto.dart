@@ -1,6 +1,17 @@
+import 'package:coin_flutter/domain/models/trending/trending_coin.dart';
 import 'package:equatable/equatable.dart';
 
 class TrendingCoinDTO extends Equatable {
+  final String id;
+  final int coinId;
+  final String name;
+  final String symbol;
+  final int marketCapRank;
+  final String thumbUrl;
+  final String smallUrl;
+  final String largeUrl;
+  final String slug;
+
   const TrendingCoinDTO({
     required this.id,
     required this.coinId,
@@ -12,16 +23,6 @@ class TrendingCoinDTO extends Equatable {
     required this.largeUrl,
     required this.slug,
   });
-
-  final String id;
-  final int coinId;
-  final String name;
-  final String symbol;
-  final int marketCapRank;
-  final String thumbUrl;
-  final String smallUrl;
-  final String largeUrl;
-  final String slug;
 
   factory TrendingCoinDTO.fromJson(Map<String, dynamic> json) {
     return TrendingCoinDTO(
@@ -63,4 +64,18 @@ class TrendingCoinDTO extends Equatable {
         largeUrl,
         slug,
       ];
+}
+
+extension TrendingCoinMapper on TrendingCoinDTO {
+  TrendingCoin toTrendingCoin() => TrendingCoin(
+        id: id,
+        coinId: coinId,
+        name: name,
+        symbol: symbol,
+        marketCapRank: marketCapRank,
+        thumbUrl: thumbUrl,
+        smallUrl: smallUrl,
+        largeUrl: largeUrl,
+        slug: slug,
+      );
 }

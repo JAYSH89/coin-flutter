@@ -1,7 +1,14 @@
-import 'package:coin_flutter/data/models/trending/trending_coin_dto.dart';
+import 'package:coin_flutter/domain/models/trending/trending_categories.dart';
 import 'package:equatable/equatable.dart';
 
 class TrendingCategoriesDTO extends Equatable {
+  final int id;
+  final String name;
+  final double marketCap1hChange;
+  final String slug;
+  final int coinsCount;
+  final TrendingCategoriesDataDTO data;
+
   const TrendingCategoriesDTO({
     required this.id,
     required this.name,
@@ -10,13 +17,6 @@ class TrendingCategoriesDTO extends Equatable {
     required this.coinsCount,
     required this.data,
   });
-
-  final int id;
-  final String name;
-  final double marketCap1hChange;
-  final String slug;
-  final int coinsCount;
-  final TrendingCategoriesDataDTO data;
 
   factory TrendingCategoriesDTO.fromJson(Map<String, dynamic> json) {
     return TrendingCategoriesDTO(
@@ -49,6 +49,17 @@ class TrendingCategoriesDTO extends Equatable {
         coinsCount,
         data.toJson(),
       ];
+}
+
+extension TrendingCategoriesMapper on TrendingCategoriesDTO {
+  TrendingCategories toTrendingCategories() => TrendingCategories(
+        id: id,
+        name: name,
+        marketCap1hChange: marketCap1hChange,
+        slug: slug,
+        coinsCount: coinsCount,
+        data: data.toTrendingCategoriesData(),
+      );
 }
 
 class TrendingCategoriesDataDTO extends Equatable {
@@ -99,4 +110,15 @@ class TrendingCategoriesDataDTO extends Equatable {
         marketCapChangePercentage24h,
         sparkline,
       ];
+}
+
+extension TrendingCategoriesDataMapper on TrendingCategoriesDataDTO {
+  TrendingCategoriesData toTrendingCategoriesData() => TrendingCategoriesData(
+        marketCap: marketCap,
+        marketCapBtc: marketCapBtc,
+        totalVolume: totalVolume,
+        totalVolumeBtc: totalVolumeBtc,
+        marketCapChangePercentage24h: marketCapChangePercentage24h,
+        sparkline: sparkline,
+      );
 }

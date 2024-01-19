@@ -1,7 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-class Trending extends Equatable {
-  const Trending({
+class TrendingCoin extends Equatable {
+  final String id;
+  final int coinId;
+  final String name;
+  final String symbol;
+  final int marketCapRank;
+  final String thumbUrl;
+  final String smallUrl;
+  final String largeUrl;
+  final String slug;
+
+  const TrendingCoin({
     required this.id,
     required this.coinId,
     required this.name,
@@ -12,16 +22,6 @@ class Trending extends Equatable {
     required this.largeUrl,
     required this.slug,
   });
-
-  final String id;
-  final int coinId;
-  final String name;
-  final String symbol;
-  final int marketCapRank;
-  final String thumbUrl;
-  final String smallUrl;
-  final String largeUrl;
-  final String slug;
 
   @override
   List<Object?> get props => [

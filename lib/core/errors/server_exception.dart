@@ -6,7 +6,6 @@ class ConnectionException implements Exception, Equatable {
   ConnectionException({this.message = 'Server error occurred'});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [message];
 
   @override

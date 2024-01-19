@@ -1,4 +1,4 @@
-import 'package:coin_flutter/domain/models/trending.dart';
+import 'package:coin_flutter/domain/models/trending/trending.dart';
 import 'package:coin_flutter/domain/repositories/coin_repository.dart';
 
 class GetTrendingCoinsUseCase {
@@ -6,7 +6,7 @@ class GetTrendingCoinsUseCase {
 
   GetTrendingCoinsUseCase(this.repository);
 
-  Future<List<Trending>> execute() async {
+  Future<Trending> execute() async {
     return await repository.getTrendingCoins();
   }
 }

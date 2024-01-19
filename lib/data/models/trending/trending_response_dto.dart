@@ -1,18 +1,19 @@
 import 'package:coin_flutter/data/models/trending/trending_categories_dto.dart';
 import 'package:coin_flutter/data/models/trending/trending_coin_dto.dart';
 import 'package:coin_flutter/data/models/trending/trending_nfts_dto.dart';
+import 'package:coin_flutter/domain/models/trending/trending.dart';
 import 'package:equatable/equatable.dart';
 
 class TrendingResponseDTO extends Equatable {
+  final List<TrendingCoinDTO> coins;
+  final List<TrendingNftsDTO> nfts;
+  final List<TrendingCategoriesDTO> categories;
+
   const TrendingResponseDTO({
     required this.coins,
     required this.nfts,
     required this.categories,
   });
-
-  final List<TrendingCoinDTO> coins;
-  final List<TrendingNftsDTO> nfts;
-  final List<TrendingCategoriesDTO> categories;
 
   factory TrendingResponseDTO.fromJson(Map<String, dynamic> json) {
     final List<dynamic> trendingCoins = json['coins'];
@@ -50,4 +51,12 @@ class TrendingResponseDTO extends Equatable {
         nfts,
         categories,
       ];
+}
+
+extension TrendingResponseMapper on TrendingResponseDTO {
+  Trending toTrending() => Trending(
+        coins: coins.map((e) => e.toTrendingCoin()).toList(),
+        nfts: nfts.map((e) => e.toTrendingNfts()).toList(),
+        categories: categories.map((e) => e.toTrendingCategories()).toList(),
+      );
 }

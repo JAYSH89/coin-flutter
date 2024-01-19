@@ -6,6 +6,12 @@
 
 * mockito [link](https://pub.dev/packages/mockito)
 * build_runner [link](https://pub.dev/packages/build_runner)
+* bloc_test [link](https://pub.dev/packages/bloc_test)
+* freezed [link](https://pub.dev/packages/freezed)
+* freezed_annotation [link](https://pub.dev/packages/freezed_annotation)
+* equatable [link](https://pub.dev/packages/equatable)
+* http [link](https://pub.dev/packages/http)
+* rxDart [link](https://pub.dev/packages/rxdart)
 
 ## Commands
 
