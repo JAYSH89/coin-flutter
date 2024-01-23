@@ -2,6 +2,7 @@ import 'package:coin_flutter/domain/models/trending/trending.dart';
 import 'package:coin_flutter/domain/models/trending/trending_coin.dart';
 import 'package:coin_flutter/injection_container.dart';
 import 'package:coin_flutter/presentation/bloc/trending/trending_bloc.dart';
+import 'package:coin_flutter/presentation/widgets/CoinAppBar.dart';
 import 'package:coin_flutter/presentation/widgets/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,20 +37,11 @@ class _TrendingScreenState extends State<TrendingView> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: _appBar(),
+        appBar: CoinAppBar(title: 'Trending'),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [_buildBody()],
         ),
-      );
-
-  _appBar() => AppBar(
-        backgroundColor: const Color(0xFF000000),
-        title: Text(
-          'Trending',
-          style: satoshiBlack.copyWith(color: Colors.white),
-        ),
-        centerTitle: true,
       );
 
   _buildBody() {
