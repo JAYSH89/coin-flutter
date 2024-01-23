@@ -103,24 +103,22 @@ class _TrendingScreenState extends State<TrendingView> {
       );
 
   Widget _coinCardLogo(String url) => ClipOval(
-      child: SizedBox.fromSize(
-        size: const Size.fromRadius(32),
-        child: Image.network(url),
-      ),
-    );
+        child: SizedBox.fromSize(
+          size: const Size.fromRadius(32),
+          child: Image.network(url),
+        ),
+      );
 
-  Widget _coinCardName(String abbreviation, String name) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(abbreviation),
-          Text(name),
-        ],
-      ),
-    );
-  }
+  Widget _coinCardName(String abbreviation, String name) => Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(abbreviation),
+            Text(name),
+          ],
+        ),
+      );
 
   Widget _coinCardValue(String value) => Column(
         children: [Text(value)],
