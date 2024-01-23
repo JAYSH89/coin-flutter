@@ -1,6 +1,8 @@
 import 'package:coin_flutter/domain/models/trending/trending.dart';
+import 'package:coin_flutter/domain/models/trending/trending_coin.dart';
 import 'package:coin_flutter/injection_container.dart';
 import 'package:coin_flutter/presentation/bloc/trending/trending_bloc.dart';
+import 'package:coin_flutter/presentation/widgets/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,48 +16,60 @@ class TrendingPage extends StatelessWidget {
       );
 }
 
-class TrendingView extends StatelessWidget {
+class TrendingView extends StatefulWidget {
   const TrendingView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF000000),
-        title: const Text(
-          'Trending',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+  State<StatefulWidget> createState() => _TrendingScreenState();
+}
+
+class _TrendingScreenState extends State<TrendingView> {
+  @override
+  void initState() {
+    super.initState();
+    _loadTrendingData();
+  }
+
+  void _loadTrendingData() {
+    BlocProvider.of<TrendingBloc>(context).add(const OnReloadTrending());
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: _appBar(),
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [_buildBody()],
         ),
-      ),
-    );
-  }
+      );
+
+  _appBar() => AppBar(
+        backgroundColor: const Color(0xFF000000),
+        title: Text(
+          'Trending',
+          style: satoshiBlack.copyWith(color: Colors.white),
+        ),
+        centerTitle: true,
+      );
 
   _buildBody() {
     return BlocBuilder<TrendingBloc, TrendingState>(builder: (context, state) {
       switch (state) {
         case TrendingInitial():
-          return _initial(context);
+          return _emptyContent(context);
         case TrendingLoading():
-          return _loader();
+          return _loadingContent();
         case TrendingSuccess():
-          return _success(state.result);
+          return _successContent(state.result);
         case TrendingError():
           return _error(state.message);
         default:
-          return _initial(context);
+          return _emptyContent(context);
       }
     });
   }
 
-  Widget _initial(BuildContext context) => Center(
+  Widget _emptyContent(BuildContext context) => Center(
         child: MaterialButton(
           onPressed: () {
             BlocProvider.of<TrendingBloc>(context)
@@ -65,11 +79,53 @@ class TrendingView extends StatelessWidget {
         ),
       );
 
-  Widget _loader() => const Center(child: CircularProgressIndicator());
+  Widget _loadingContent() => const Center(child: CircularProgressIndicator());
 
-  Widget _success(Trending trending) {
-    return Center(child: Text(trending.coins.first.name));
-  }
+  Widget _successContent(Trending trending) => Expanded(
+        child: ListView.builder(
+          itemCount: trending.coins.length,
+          itemBuilder: (context, index) => _coinCard(trending.coins[index]),
+        ),
+      );
 
   Widget _error(String message) => Center(child: Text(message));
+
+  Widget _coinCard(TrendingCoin coin) => Padding(
+        padding: const EdgeInsets.all(12),
+        child: Expanded(
+          child: Row(
+            children: [
+              _coinCardLogo(coin.largeUrl),
+              _coinCardName(coin.name, coin.slug),
+              _coinCardValue(coin.marketCapRank.toString()),
+            ],
+          ),
+        ),
+      );
+
+  Widget _coinCardLogo(String url) {
+    return ClipOval(
+      child: SizedBox.fromSize(
+        size: const Size.fromRadius(32),
+        child: Image.network(url),
+      ),
+    );
+  }
+
+  Widget _coinCardName(String abbreviation, String name) => Expanded(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(abbreviation),
+              Text(name),
+            ],
+          ),
+        ),
+      );
+
+  Widget _coinCardValue(String value) => Column(
+        children: [Text(value)],
+      );
 }
