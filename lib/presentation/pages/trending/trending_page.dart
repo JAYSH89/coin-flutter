@@ -95,7 +95,7 @@ class _TrendingScreenState extends State<TrendingView> {
         child: Row(
           children: [
             _coinCardLogo(coin.largeUrl),
-            _coinCardName(coin.name, coin.slug),
+            _coinCardName(coin.name, coin.symbol),
           ],
         ),
       );
