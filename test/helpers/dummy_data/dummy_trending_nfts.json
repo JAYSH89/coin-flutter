@@ -1,0 +1,18 @@
+{
+  "id": "gen1-pass-holders",
+  "name": "GEN1 Pass Holders",
+  "symbol": "GEN1PASS",
+  "thumb": "https://assets.coingecko.com/nft_contracts/images/3604/small/gen1.png?1699593195",
+  "nft_contract_id": 3604,
+  "native_currency_symbol": "eth",
+  "floor_price_in_native_currency": 100.0,
+  "floor_price_24h_percentage_change": 903.460574078169,
+  "data": {
+    "floor_price": "100.00 ETH",
+    "floor_price_in_usd_24h_percentage_change": "903.460574078169",
+    "h24_volume": "9.11 ETH",
+    "h24_average_sale_price": "9.11 ETH",
+    "sparkline": "https://www.coingecko.com/nft/3604/sparkline.svg",
+    "content": null
+  }
+}

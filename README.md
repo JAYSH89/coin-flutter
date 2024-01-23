@@ -1,16 +1,42 @@
 # coin_flutter
 
-A new Flutter project.
-
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Dependencies
 
-A few resources to get you started if this is your first Flutter project:
+* build_runner [link](https://pub.dev/packages/build_runner)
+* freezed [link](https://pub.dev/packages/freezed)
+* freezed_annotation [link](https://pub.dev/packages/freezed_annotation)
+* equatable [link](https://pub.dev/packages/equatable)
+* http [link](https://pub.dev/packages/http)
+* rxDart [link](https://pub.dev/packages/rxdart)
+* go_router [link](https://pub.dev/packages/go_router)
+* test [link](https://pub.dev/packages/test)
+* bloc_test [link](https://pub.dev/packages/bloc_test)
+* mockito [link](https://pub.dev/packages/mockito)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Commands
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Run tests:
+
+```shell
+flutter test
+```
+
+Build runner:
+
+```shell
+dart run build_runner build
+```
+
+Build runner (watch):
+
+```shell
+dart run build_runner watch
+```
+
+Get dependencies:
+
+```shell
+flutter pub get
+```
