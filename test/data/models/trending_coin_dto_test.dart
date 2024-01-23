@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:coin_flutter/data/models/trending/trending_coin_dto.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 import '../../helpers/json_reader.dart';
 

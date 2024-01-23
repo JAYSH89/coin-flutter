@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:coin_flutter/core/errors/server_exception.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:coin_flutter/core/constants/constants.dart';
 import 'package:coin_flutter/data/datasources/coin_remote_data_source_impl.dart';

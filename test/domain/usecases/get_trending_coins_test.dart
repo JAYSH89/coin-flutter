@@ -1,7 +1,7 @@
 import 'package:coin_flutter/domain/models/trending/trending.dart';
 import 'package:coin_flutter/domain/usecases/get_trending_coins.dart';
 import 'package:mockito/mockito.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 

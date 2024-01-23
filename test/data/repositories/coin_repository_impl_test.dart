@@ -5,7 +5,7 @@ import 'package:coin_flutter/data/models/trending/trending_response_dto.dart';
 import 'package:coin_flutter/data/repositories/coin_repository_impl.dart';
 import 'package:coin_flutter/domain/models/trending/trending.dart';
 import 'package:mockito/mockito.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 

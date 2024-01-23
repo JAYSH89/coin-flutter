@@ -8,11 +8,4 @@ String readJson(String name) {
   }
 
   return File('$dir/test/$name').readAsStringSync();
-
-  // Optionally remove newlines and carriage returns if they are problematic
-  // String sanitizedContent = fileContent
-  //     .replaceAll('\n', '')
-  //     .replaceAll('\r', '');
-  //
-  // return sanitizedContent;
 }
