@@ -96,8 +96,6 @@ class _TrendingScreenState extends State<TrendingView> {
           children: [
             _coinCardLogo(coin.largeUrl),
             _coinCardName(coin.name, coin.slug),
-            const Spacer(),
-            _coinCardValue(coin.marketCapRank.toString()),
           ],
         ),
       );
@@ -114,13 +112,9 @@ class _TrendingScreenState extends State<TrendingView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(abbreviation),
-            Text(name),
+            Text(abbreviation, style: satoshiBold),
+            Text(name, style: satoshiRegular),
           ],
         ),
-      );
-
-  Widget _coinCardValue(String value) => Column(
-        children: [Text(value)],
       );
 }
