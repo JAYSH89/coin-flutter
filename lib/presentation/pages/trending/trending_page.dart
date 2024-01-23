@@ -91,39 +91,36 @@ class _TrendingScreenState extends State<TrendingView> {
   Widget _error(String message) => Center(child: Text(message));
 
   Widget _coinCard(TrendingCoin coin) => Padding(
-        padding: const EdgeInsets.all(12),
-        child: Expanded(
-          child: Row(
-            children: [
-              _coinCardLogo(coin.largeUrl),
-              _coinCardName(coin.name, coin.slug),
-              _coinCardValue(coin.marketCapRank.toString()),
-            ],
-          ),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: Row(
+          children: [
+            _coinCardLogo(coin.largeUrl),
+            _coinCardName(coin.name, coin.slug),
+            const Spacer(),
+            _coinCardValue(coin.marketCapRank.toString()),
+          ],
         ),
       );
 
-  Widget _coinCardLogo(String url) {
-    return ClipOval(
+  Widget _coinCardLogo(String url) => ClipOval(
       child: SizedBox.fromSize(
         size: const Size.fromRadius(32),
         child: Image.network(url),
       ),
     );
-  }
 
-  Widget _coinCardName(String abbreviation, String name) => Expanded(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(abbreviation),
-              Text(name),
-            ],
-          ),
-        ),
-      );
+  Widget _coinCardName(String abbreviation, String name) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(abbreviation),
+          Text(name),
+        ],
+      ),
+    );
+  }
 
   Widget _coinCardValue(String value) => Column(
         children: [Text(value)],
