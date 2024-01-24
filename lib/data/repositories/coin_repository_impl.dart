@@ -24,6 +24,7 @@ class CoinRepositoryImpl extends CoinRepository {
   @override
   getCoinChart(String id, String currency, String days) {
     // TODO: implement getCoinChart
+    // Dummy = bitcoin - eur - 30
     throw UnimplementedError();
   }
 
