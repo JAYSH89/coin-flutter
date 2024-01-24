@@ -37,7 +37,7 @@ class _TrendingScreenState extends State<TrendingView> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: CoinAppBar(title: 'Trending'),
+        appBar: const CoinAppBar(title: 'Trending'),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [_buildBody()],
