@@ -2,11 +2,11 @@ import 'package:coin_flutter/domain/models/trending/trending_categories.dart';
 import 'package:equatable/equatable.dart';
 
 class TrendingCategoriesDTO extends Equatable {
-  final int id;
+  final num id;
   final String name;
-  final double marketCap1hChange;
+  final num marketCap1hChange;
   final String slug;
-  final int coinsCount;
+  final num coinsCount;
   final TrendingCategoriesDataDTO data;
 
   const TrendingCategoriesDTO({
@@ -29,16 +29,14 @@ class TrendingCategoriesDTO extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'market_cap_1h_change': marketCap1hChange,
-      'slug': slug,
-      'coins_count': coinsCount,
-      'data': data.toJson(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'market_cap_1h_change': marketCap1hChange,
+        'slug': slug,
+        'coins_count': coinsCount,
+        'data': data.toJson(),
+      };
 
   @override
   List<Object?> get props => [
@@ -53,11 +51,11 @@ class TrendingCategoriesDTO extends Equatable {
 
 extension TrendingCategoriesMapper on TrendingCategoriesDTO {
   TrendingCategories toTrendingCategories() => TrendingCategories(
-        id: id,
+        id: id.toInt(),
         name: name,
-        marketCap1hChange: marketCap1hChange,
+        marketCap1hChange: marketCap1hChange.toDouble(),
         slug: slug,
-        coinsCount: coinsCount,
+        coinsCount: coinsCount.toInt(),
         data: data.toTrendingCategoriesData(),
       );
 }
@@ -90,16 +88,14 @@ class TrendingCategoriesDataDTO extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'market_cap': marketCap,
-      'market_cap_btc': marketCapBtc,
-      'total_volume': totalVolume,
-      'total_volume_btc': totalVolumeBtc,
-      'market_cap_change_percentage_24h': marketCapChangePercentage24h,
-      'sparkline': sparkline,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'market_cap': marketCap,
+        'market_cap_btc': marketCapBtc,
+        'total_volume': totalVolume,
+        'total_volume_btc': totalVolumeBtc,
+        'market_cap_change_percentage_24h': marketCapChangePercentage24h,
+        'sparkline': sparkline,
+      };
 
   @override
   List<Object?> get props => [

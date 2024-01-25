@@ -8,8 +8,8 @@ class TrendingNftsDTO extends Equatable {
   final String symbol;
   final int nftContractId;
   final String nativeCurrencySymbol;
-  final double floorPriceInNativeCurrency;
-  final double floorPrice24hPercentageChange;
+  final num floorPriceInNativeCurrency;
+  final num floorPrice24hPercentageChange;
   final TrendingNftsDataDTO data;
 
   const TrendingNftsDTO({
@@ -32,16 +32,13 @@ class TrendingNftsDTO extends Equatable {
       thumb: json['thumb'],
       nftContractId: json['nft_contract_id'],
       nativeCurrencySymbol: json['native_currency_symbol'],
-      floorPriceInNativeCurrency:
-          (json['floor_price_in_native_currency'] as num).toDouble(),
-      floorPrice24hPercentageChange:
-          (json['floor_price_24h_percentage_change'] as num).toDouble(),
+      floorPriceInNativeCurrency: json['floor_price_in_native_currency'],
+      floorPrice24hPercentageChange: json['floor_price_24h_percentage_change'],
       data: TrendingNftsDataDTO.fromJson(json['data']),
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
+  Map<String, dynamic> toJson() => {
       'id': id,
       'name': name,
       'symbol': symbol,
@@ -52,7 +49,6 @@ class TrendingNftsDTO extends Equatable {
       'floor_price_24h_percentage_change': floorPrice24hPercentageChange,
       'data': data.toJson(),
     };
-  }
 
   @override
   List<Object?> get props => [
@@ -75,8 +71,8 @@ extension TrendingNftsMapper on TrendingNftsDTO {
         thumb: thumb,
         nftContractId: nftContractId,
         nativeCurrencySymbol: nativeCurrencySymbol,
-        floorPriceInNativeCurrency: floorPriceInNativeCurrency,
-        floorPrice24hPercentageChange: floorPrice24hPercentageChange,
+        floorPriceInNativeCurrency: floorPriceInNativeCurrency.toDouble(),
+        floorPrice24hPercentageChange: floorPrice24hPercentageChange.toDouble(),
         data: data.toTrendingNftsData(),
       );
 }

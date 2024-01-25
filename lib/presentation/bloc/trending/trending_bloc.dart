@@ -26,6 +26,5 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
         }
       },
     );
-    on<TrendingEvent>((event, emit) {});
   }
 }
