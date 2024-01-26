@@ -2,7 +2,7 @@ import 'package:coin_flutter/domain/models/trending/trending.dart';
 import 'package:coin_flutter/domain/models/trending/trending_coin.dart';
 import 'package:coin_flutter/injection_container.dart';
 import 'package:coin_flutter/presentation/bloc/trending/trending_bloc.dart';
-import 'package:coin_flutter/presentation/widgets/CoinAppBar.dart';
+import 'package:coin_flutter/presentation/widgets/coin_app_bar.dart';
 import 'package:coin_flutter/presentation/widgets/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,18 +13,18 @@ class TrendingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (_) => getIt<TrendingBloc>(),
-        child: const TrendingView(),
+        child: const _TrendingView(),
       );
 }
 
-class TrendingView extends StatefulWidget {
-  const TrendingView({super.key});
+class _TrendingView extends StatefulWidget {
+  const _TrendingView({super.key});
 
   @override
   State<StatefulWidget> createState() => _TrendingScreenState();
 }
 
-class _TrendingScreenState extends State<TrendingView> {
+class _TrendingScreenState extends State<_TrendingView> {
   @override
   void initState() {
     super.initState();
@@ -36,12 +36,9 @@ class _TrendingScreenState extends State<TrendingView> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: const CoinAppBar(title: 'Trending'),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [_buildBody()],
-        ),
+  Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [_buildBody()],
       );
 
   _buildBody() {
