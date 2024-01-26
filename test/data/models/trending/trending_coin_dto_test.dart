@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:coin_flutter/data/models/trending/trending_coin_dto.dart';
 import 'package:test/test.dart';
 
-import '../../helpers/json_reader.dart';
+import '../../../helpers/json_reader.dart';
 
 void main() {
   const TrendingCoinDTO testTrendingDTO = TrendingCoinDTO(
@@ -45,9 +45,12 @@ void main() {
       "name": "Biconomy",
       "symbol": "BICO",
       "market_cap_rank": 203,
-      "thumb": "https://assets.coingecko.com/coins/images/21061/thumb/biconomy_logo.jpg?1696520444",
-      "small": "https://assets.coingecko.com/coins/images/21061/small/biconomy_logo.jpg?1696520444",
-      "large": "https://assets.coingecko.com/coins/images/21061/large/biconomy_logo.jpg?1696520444",
+      "thumb":
+          "https://assets.coingecko.com/coins/images/21061/thumb/biconomy_logo.jpg?1696520444",
+      "small":
+          "https://assets.coingecko.com/coins/images/21061/small/biconomy_logo.jpg?1696520444",
+      "large":
+          "https://assets.coingecko.com/coins/images/21061/large/biconomy_logo.jpg?1696520444",
       "slug": "biconomy",
     };
 

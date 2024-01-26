@@ -3,10 +3,10 @@ import 'package:equatable/equatable.dart';
 
 class TrendingCoinDTO extends Equatable {
   final String id;
-  final int coinId;
+  final num coinId;
   final String name;
   final String symbol;
-  final int marketCapRank;
+  final num marketCapRank;
   final String thumbUrl;
   final String smallUrl;
   final String largeUrl;
@@ -38,19 +38,17 @@ class TrendingCoinDTO extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'coin_id': coinId,
-      'name': name,
-      'symbol': symbol,
-      'market_cap_rank': marketCapRank,
-      'thumb': thumbUrl,
-      'small': smallUrl,
-      'large': largeUrl,
-      'slug': slug,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'coin_id': coinId,
+        'name': name,
+        'symbol': symbol,
+        'market_cap_rank': marketCapRank,
+        'thumb': thumbUrl,
+        'small': smallUrl,
+        'large': largeUrl,
+        'slug': slug,
+      };
 
   @override
   List<Object?> get props => [
@@ -69,10 +67,10 @@ class TrendingCoinDTO extends Equatable {
 extension TrendingCoinMapper on TrendingCoinDTO {
   TrendingCoin toTrendingCoin() => TrendingCoin(
         id: id,
-        coinId: coinId,
+        coinId: coinId.toInt(),
         name: name,
         symbol: symbol,
-        marketCapRank: marketCapRank,
+        marketCapRank: marketCapRank.toInt(),
         thumbUrl: thumbUrl,
         smallUrl: smallUrl,
         largeUrl: largeUrl,

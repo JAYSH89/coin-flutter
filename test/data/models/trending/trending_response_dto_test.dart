@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:coin_flutter/data/models/trending/trending_response_dto.dart';
 import 'package:test/test.dart';
 
-import '../../helpers/json_reader.dart';
+import '../../../helpers/json_reader.dart';
 
 void main() {
   test('should return a valid model from json', () {

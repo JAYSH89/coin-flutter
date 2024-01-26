@@ -33,7 +33,7 @@ void main() {
   group('test coin repository searchTrending', () {
     test('should return trending when call datasource successful', () async {
       // arrange
-      when(datasource.searchTrending())
+      when(datasource.getTrendingCoins())
           .thenAnswer((realInvocation) async => testTrendingDTO);
 
       // act
@@ -41,33 +41,33 @@ void main() {
 
       // assert
       expect(result, equals(testTrending));
-      verify(datasource.searchTrending());
+      verify(datasource.getTrendingCoins());
       verifyNoMoreInteractions(datasource);
     });
 
     test('should server failure if call datasource unsuccessful', () async {
       // arrange
-      when(datasource.searchTrending()).thenThrow(ServerException());
+      when(datasource.getTrendingCoins()).thenThrow(ServerException());
 
       // act && assert
       expect(() async {
         await coinRepositoryImpl.getTrendingCoins();
       }, throwsA(isA<ServerException>()));
-      verify(datasource.searchTrending());
+      verify(datasource.getTrendingCoins());
       verifyNoMoreInteractions(datasource);
     });
 
     test('should connection failure if device has no internet connection',
         () async {
       // arrange
-      when(datasource.searchTrending())
+      when(datasource.getTrendingCoins())
           .thenThrow(const SocketException('Failed to connect to the network'));
 
       // act && assert
       expect(() async {
         await coinRepositoryImpl.getTrendingCoins();
       }, throwsA(isA<SocketException>()));
-      verify(datasource.searchTrending());
+      verify(datasource.getTrendingCoins());
       verifyNoMoreInteractions(datasource);
     });
   });
