@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  final List<Destination> routes = [Market(), Trending(), Profile()];
+  final routes = [Market(), Trending(), Profile()];
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: CoinBottomNavigationBar(
           currentIndex: _currentIndex,
           onItemTapped: _onItemTapped,
+          routes: routes,
         ),
       );
 
@@ -38,13 +39,10 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
-
     context.go(routes[index].path);
   }
 
   String _getTitle() => routes
-      .firstWhere(
-        (element) => element.path == widget.routerState.matchedLocation,
-      )
+      .firstWhere((e) => e.path == widget.routerState.matchedLocation)
       .title;
 }

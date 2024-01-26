@@ -1,3 +1,4 @@
+import 'package:coin_flutter/presentation/pages/home/route.dart';
 import 'package:flutter/material.dart';
 
 class CoinBottomNavigationBar extends StatelessWidget {
@@ -5,23 +6,28 @@ class CoinBottomNavigationBar extends StatelessWidget {
     super.key,
     required this.currentIndex,
     required this.onItemTapped,
+    required this.routes,
   });
 
   final int currentIndex;
   final Function(int) onItemTapped;
+  final List<Destination> routes;
 
   @override
   Widget build(BuildContext context) => Theme(
         data: ThemeData(useMaterial3: false),
         child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.call), label: 'Calls'),
-            BottomNavigationBarItem(icon: Icon(Icons.camera), label: 'Camera'),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chats'),
-          ],
+          items: _items(),
           onTap: onItemTapped,
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
         ),
       );
+
+  List<BottomNavigationBarItem> _items() => routes
+      .map((e) => BottomNavigationBarItem(
+            icon: Icon(e.icon),
+            label: e.title,
+          ))
+      .toList();
 }
