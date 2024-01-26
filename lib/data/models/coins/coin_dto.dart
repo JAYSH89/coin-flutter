@@ -9,7 +9,7 @@ class CoinDTO extends Equatable {
   final num currentPrice;
   final num marketCap;
   final num marketCapRank;
-  final num fullyDilutedValuation;
+  final num? fullyDilutedValuation;
   final num totalVolume;
   final num high24h;
   final num low24h;
@@ -18,7 +18,7 @@ class CoinDTO extends Equatable {
   final num marketCapChange24h;
   final num marketCapChangePercentage24h;
   final num circulatingSupply;
-  final num totalSupply;
+  final num? totalSupply;
   final num? maxSupply;
   final num ath;
   final num athChangePercentage;
@@ -37,7 +37,7 @@ class CoinDTO extends Equatable {
     required this.currentPrice,
     required this.marketCap,
     required this.marketCapRank,
-    required this.fullyDilutedValuation,
+    this.fullyDilutedValuation,
     required this.totalVolume,
     required this.high24h,
     required this.low24h,
@@ -46,7 +46,7 @@ class CoinDTO extends Equatable {
     required this.marketCapChange24h,
     required this.marketCapChangePercentage24h,
     required this.circulatingSupply,
-    required this.totalSupply,
+    this.totalSupply,
     this.maxSupply,
     required this.ath,
     required this.athChangePercentage,
@@ -83,7 +83,7 @@ class CoinDTO extends Equatable {
         atl: json['atl'],
         atlChangePercentage: json['atl_change_percentage'],
         atlDate: DateTime.parse(json['atl_date']),
-        roi: CoinRoiDTO.fromJson(json['roi']),
+        roi: json['roi'] != null ? CoinRoiDTO.fromJson(json['roi']) : null,
         lastUpdated: DateTime.parse(json['last_updated']),
       );
 
@@ -156,7 +156,7 @@ extension CoinDTOMapper on CoinDTO {
         currentPrice: currentPrice.toDouble(),
         marketCap: marketCap.toDouble(),
         marketCapRank: marketCapRank.toDouble(),
-        fullyDilutedValuation: fullyDilutedValuation.toDouble(),
+        fullyDilutedValuation: fullyDilutedValuation?.toDouble(),
         totalVolume: totalVolume.toDouble(),
         high24h: high24h.toDouble(),
         low24h: low24h.toDouble(),
@@ -165,7 +165,7 @@ extension CoinDTOMapper on CoinDTO {
         marketCapChange24h: marketCapChange24h.toDouble(),
         marketCapChangePercentage24h: marketCapChangePercentage24h.toDouble(),
         circulatingSupply: circulatingSupply.toDouble(),
-        totalSupply: totalSupply.toDouble(),
+        totalSupply: totalSupply?.toDouble(),
         maxSupply: maxSupply?.toDouble(),
         ath: ath.toDouble(),
         athChangePercentage: athChangePercentage.toDouble(),

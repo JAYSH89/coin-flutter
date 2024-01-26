@@ -8,7 +8,7 @@ class Coin extends Equatable {
   final double currentPrice;
   final double marketCap;
   final double marketCapRank;
-  final double fullyDilutedValuation;
+  final double? fullyDilutedValuation;
   final double totalVolume;
   final double high24h;
   final double low24h;
@@ -17,7 +17,7 @@ class Coin extends Equatable {
   final double marketCapChange24h;
   final double marketCapChangePercentage24h;
   final double circulatingSupply;
-  final double totalSupply;
+  final double? totalSupply;
   final double? maxSupply;
   final double ath;
   final double athChangePercentage;
@@ -36,7 +36,7 @@ class Coin extends Equatable {
     required this.currentPrice,
     required this.marketCap,
     required this.marketCapRank,
-    required this.fullyDilutedValuation,
+    this.fullyDilutedValuation,
     required this.totalVolume,
     required this.high24h,
     required this.low24h,
@@ -45,7 +45,7 @@ class Coin extends Equatable {
     required this.marketCapChange24h,
     required this.marketCapChangePercentage24h,
     required this.circulatingSupply,
-    required this.totalSupply,
+    this.totalSupply,
     this.maxSupply,
     required this.ath,
     required this.athChangePercentage,

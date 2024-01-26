@@ -3,20 +3,24 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-import 'dart:convert' as _i9;
-import 'dart:typed_data' as _i11;
+import 'dart:async' as _i8;
+import 'dart:convert' as _i13;
+import 'dart:typed_data' as _i15;
 
 import 'package:coin_flutter/data/datasources/coin_remote_data_source.dart'
-    as _i7;
+    as _i10;
+import 'package:coin_flutter/data/models/coins/coin_detail_dto.dart' as _i5;
+import 'package:coin_flutter/data/models/coins/coin_dto.dart' as _i11;
 import 'package:coin_flutter/data/models/trending/trending_response_dto.dart'
-    as _i3;
+    as _i4;
+import 'package:coin_flutter/domain/models/coins/coin.dart' as _i9;
+import 'package:coin_flutter/domain/models/coins/coin_detail.dart' as _i3;
 import 'package:coin_flutter/domain/models/trending/trending.dart' as _i2;
-import 'package:coin_flutter/domain/repositories/coin_repository.dart' as _i4;
-import 'package:coin_flutter/domain/usecases/get_trending_coins.dart' as _i8;
-import 'package:http/http.dart' as _i5;
+import 'package:coin_flutter/domain/repositories/coin_repository.dart' as _i6;
+import 'package:coin_flutter/domain/usecases/get_trending_coins.dart' as _i12;
+import 'package:http/http.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i14;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -41,9 +45,8 @@ class _FakeTrending_0 extends _i1.SmartFake implements _i2.Trending {
         );
 }
 
-class _FakeTrendingResponseDTO_1 extends _i1.SmartFake
-    implements _i3.TrendingResponseDTO {
-  _FakeTrendingResponseDTO_1(
+class _FakeCoinDetail_1 extends _i1.SmartFake implements _i3.CoinDetail {
+  _FakeCoinDetail_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,9 +55,9 @@ class _FakeTrendingResponseDTO_1 extends _i1.SmartFake
         );
 }
 
-class _FakeCoinRepository_2 extends _i1.SmartFake
-    implements _i4.CoinRepository {
-  _FakeCoinRepository_2(
+class _FakeTrendingResponseDTO_2 extends _i1.SmartFake
+    implements _i4.TrendingResponseDTO {
+  _FakeTrendingResponseDTO_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -63,8 +66,8 @@ class _FakeCoinRepository_2 extends _i1.SmartFake
         );
 }
 
-class _FakeResponse_3 extends _i1.SmartFake implements _i5.Response {
-  _FakeResponse_3(
+class _FakeCoinDetailDTO_3 extends _i1.SmartFake implements _i5.CoinDetailDTO {
+  _FakeCoinDetailDTO_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -73,9 +76,30 @@ class _FakeResponse_3 extends _i1.SmartFake implements _i5.Response {
         );
 }
 
-class _FakeStreamedResponse_4 extends _i1.SmartFake
-    implements _i5.StreamedResponse {
-  _FakeStreamedResponse_4(
+class _FakeCoinRepository_4 extends _i1.SmartFake
+    implements _i6.CoinRepository {
+  _FakeCoinRepository_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeResponse_5 extends _i1.SmartFake implements _i7.Response {
+  _FakeResponse_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeStreamedResponse_6 extends _i1.SmartFake
+    implements _i7.StreamedResponse {
+  _FakeStreamedResponse_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -87,124 +111,145 @@ class _FakeStreamedResponse_4 extends _i1.SmartFake
 /// A class which mocks [CoinRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCoinRepository extends _i1.Mock implements _i4.CoinRepository {
+class MockCoinRepository extends _i1.Mock implements _i6.CoinRepository {
   MockCoinRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  dynamic search(String? query) => super.noSuchMethod(Invocation.method(
-        #search,
-        [query],
-      ));
-
-  @override
-  _i6.Future<_i2.Trending> getTrendingCoins() => (super.noSuchMethod(
+  _i8.Future<_i2.Trending> getTrendingCoins() => (super.noSuchMethod(
         Invocation.method(
           #getTrendingCoins,
           [],
         ),
-        returnValue: _i6.Future<_i2.Trending>.value(_FakeTrending_0(
+        returnValue: _i8.Future<_i2.Trending>.value(_FakeTrending_0(
           this,
           Invocation.method(
             #getTrendingCoins,
             [],
           ),
         )),
-      ) as _i6.Future<_i2.Trending>);
+      ) as _i8.Future<_i2.Trending>);
 
   @override
-  dynamic getCoin(String? id) => super.noSuchMethod(Invocation.method(
-        #getCoin,
-        [id],
-      ));
+  _i8.Future<List<_i9.Coin>> getAllCoins() => (super.noSuchMethod(
+        Invocation.method(
+          #getAllCoins,
+          [],
+        ),
+        returnValue: _i8.Future<List<_i9.Coin>>.value(<_i9.Coin>[]),
+      ) as _i8.Future<List<_i9.Coin>>);
 
   @override
-  dynamic getCoinChart(
-    String? id,
-    String? currency,
-    String? days,
-  ) =>
-      super.noSuchMethod(Invocation.method(
-        #getCoinChart,
-        [
-          id,
-          currency,
-          days,
-        ],
-      ));
+  _i8.Future<_i3.CoinDetail> getCoin(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #getCoin,
+          [id],
+        ),
+        returnValue: _i8.Future<_i3.CoinDetail>.value(_FakeCoinDetail_1(
+          this,
+          Invocation.method(
+            #getCoin,
+            [id],
+          ),
+        )),
+      ) as _i8.Future<_i3.CoinDetail>);
 }
 
 /// A class which mocks [CoinRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCoinRemoteDataSource extends _i1.Mock
-    implements _i7.CoinRemoteDataSource {
+    implements _i10.CoinRemoteDataSource {
   MockCoinRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i3.TrendingResponseDTO> searchTrending() => (super.noSuchMethod(
+  _i8.Future<_i4.TrendingResponseDTO> getTrendingCoins() => (super.noSuchMethod(
         Invocation.method(
-          #searchTrending,
+          #getTrendingCoins,
           [],
         ),
-        returnValue: _i6.Future<_i3.TrendingResponseDTO>.value(
-            _FakeTrendingResponseDTO_1(
+        returnValue: _i8.Future<_i4.TrendingResponseDTO>.value(
+            _FakeTrendingResponseDTO_2(
           this,
           Invocation.method(
-            #searchTrending,
+            #getTrendingCoins,
             [],
           ),
         )),
-      ) as _i6.Future<_i3.TrendingResponseDTO>);
+      ) as _i8.Future<_i4.TrendingResponseDTO>);
+
+  @override
+  _i8.Future<List<_i11.CoinDTO>> getAllCoins() => (super.noSuchMethod(
+        Invocation.method(
+          #getAllCoins,
+          [],
+        ),
+        returnValue: _i8.Future<List<_i11.CoinDTO>>.value(<_i11.CoinDTO>[]),
+      ) as _i8.Future<List<_i11.CoinDTO>>);
+
+  @override
+  _i8.Future<_i5.CoinDetailDTO> getCoin(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #getCoin,
+          [id],
+        ),
+        returnValue: _i8.Future<_i5.CoinDetailDTO>.value(_FakeCoinDetailDTO_3(
+          this,
+          Invocation.method(
+            #getCoin,
+            [id],
+          ),
+        )),
+      ) as _i8.Future<_i5.CoinDetailDTO>);
 }
 
 /// A class which mocks [GetTrendingCoinsUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetTrendingCoinsUseCase extends _i1.Mock
-    implements _i8.GetTrendingCoinsUseCase {
+    implements _i12.GetTrendingCoinsUseCase {
   MockGetTrendingCoinsUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.CoinRepository get repository => (super.noSuchMethod(
+  _i6.CoinRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeCoinRepository_2(
+        returnValue: _FakeCoinRepository_4(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i4.CoinRepository);
+      ) as _i6.CoinRepository);
 
   @override
-  _i6.Future<_i2.Trending> execute() => (super.noSuchMethod(
+  _i8.Future<_i2.Trending> execute() => (super.noSuchMethod(
         Invocation.method(
           #execute,
           [],
         ),
-        returnValue: _i6.Future<_i2.Trending>.value(_FakeTrending_0(
+        returnValue: _i8.Future<_i2.Trending>.value(_FakeTrending_0(
           this,
           Invocation.method(
             #execute,
             [],
           ),
         )),
-      ) as _i6.Future<_i2.Trending>);
+      ) as _i8.Future<_i2.Trending>);
 }
 
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClient extends _i1.Mock implements _i5.Client {
+class MockHttpClient extends _i1.Mock implements _i7.Client {
   MockHttpClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i5.Response> head(
+  _i8.Future<_i7.Response> head(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -214,7 +259,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i6.Future<_i5.Response>.value(_FakeResponse_3(
+        returnValue: _i8.Future<_i7.Response>.value(_FakeResponse_5(
           this,
           Invocation.method(
             #head,
@@ -222,10 +267,10 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             {#headers: headers},
           ),
         )),
-      ) as _i6.Future<_i5.Response>);
+      ) as _i8.Future<_i7.Response>);
 
   @override
-  _i6.Future<_i5.Response> get(
+  _i8.Future<_i7.Response> get(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -235,7 +280,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i6.Future<_i5.Response>.value(_FakeResponse_3(
+        returnValue: _i8.Future<_i7.Response>.value(_FakeResponse_5(
           this,
           Invocation.method(
             #get,
@@ -243,14 +288,14 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             {#headers: headers},
           ),
         )),
-      ) as _i6.Future<_i5.Response>);
+      ) as _i8.Future<_i7.Response>);
 
   @override
-  _i6.Future<_i5.Response> post(
+  _i8.Future<_i7.Response> post(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i9.Encoding? encoding,
+    _i13.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -262,7 +307,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i6.Future<_i5.Response>.value(_FakeResponse_3(
+        returnValue: _i8.Future<_i7.Response>.value(_FakeResponse_5(
           this,
           Invocation.method(
             #post,
@@ -274,14 +319,14 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             },
           ),
         )),
-      ) as _i6.Future<_i5.Response>);
+      ) as _i8.Future<_i7.Response>);
 
   @override
-  _i6.Future<_i5.Response> put(
+  _i8.Future<_i7.Response> put(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i9.Encoding? encoding,
+    _i13.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -293,7 +338,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i6.Future<_i5.Response>.value(_FakeResponse_3(
+        returnValue: _i8.Future<_i7.Response>.value(_FakeResponse_5(
           this,
           Invocation.method(
             #put,
@@ -305,14 +350,14 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             },
           ),
         )),
-      ) as _i6.Future<_i5.Response>);
+      ) as _i8.Future<_i7.Response>);
 
   @override
-  _i6.Future<_i5.Response> patch(
+  _i8.Future<_i7.Response> patch(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i9.Encoding? encoding,
+    _i13.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -324,7 +369,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i6.Future<_i5.Response>.value(_FakeResponse_3(
+        returnValue: _i8.Future<_i7.Response>.value(_FakeResponse_5(
           this,
           Invocation.method(
             #patch,
@@ -336,14 +381,14 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             },
           ),
         )),
-      ) as _i6.Future<_i5.Response>);
+      ) as _i8.Future<_i7.Response>);
 
   @override
-  _i6.Future<_i5.Response> delete(
+  _i8.Future<_i7.Response> delete(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i9.Encoding? encoding,
+    _i13.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -355,7 +400,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             #encoding: encoding,
           },
         ),
-        returnValue: _i6.Future<_i5.Response>.value(_FakeResponse_3(
+        returnValue: _i8.Future<_i7.Response>.value(_FakeResponse_5(
           this,
           Invocation.method(
             #delete,
@@ -367,10 +412,10 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             },
           ),
         )),
-      ) as _i6.Future<_i5.Response>);
+      ) as _i8.Future<_i7.Response>);
 
   @override
-  _i6.Future<String> read(
+  _i8.Future<String> read(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -380,7 +425,7 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i6.Future<String>.value(_i10.dummyValue<String>(
+        returnValue: _i8.Future<String>.value(_i14.dummyValue<String>(
           this,
           Invocation.method(
             #read,
@@ -388,10 +433,10 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
             {#headers: headers},
           ),
         )),
-      ) as _i6.Future<String>);
+      ) as _i8.Future<String>);
 
   @override
-  _i6.Future<_i11.Uint8List> readBytes(
+  _i8.Future<_i15.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -401,25 +446,25 @@ class MockHttpClient extends _i1.Mock implements _i5.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i6.Future<_i11.Uint8List>.value(_i11.Uint8List(0)),
-      ) as _i6.Future<_i11.Uint8List>);
+        returnValue: _i8.Future<_i15.Uint8List>.value(_i15.Uint8List(0)),
+      ) as _i8.Future<_i15.Uint8List>);
 
   @override
-  _i6.Future<_i5.StreamedResponse> send(_i5.BaseRequest? request) =>
+  _i8.Future<_i7.StreamedResponse> send(_i7.BaseRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #send,
           [request],
         ),
         returnValue:
-            _i6.Future<_i5.StreamedResponse>.value(_FakeStreamedResponse_4(
+            _i8.Future<_i7.StreamedResponse>.value(_FakeStreamedResponse_6(
           this,
           Invocation.method(
             #send,
             [request],
           ),
         )),
-      ) as _i6.Future<_i5.StreamedResponse>);
+      ) as _i8.Future<_i7.StreamedResponse>);
 
   @override
   void close() => super.noSuchMethod(

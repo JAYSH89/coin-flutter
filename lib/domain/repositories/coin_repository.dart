@@ -1,9 +1,11 @@
+import 'package:coin_flutter/domain/models/coins/coin.dart';
+import 'package:coin_flutter/domain/models/coins/coin_detail.dart';
 import 'package:coin_flutter/domain/models/trending/trending.dart';
 
 abstract class CoinRepository {
-  search(String query);
   Future<Trending> getTrendingCoins();
-  getAllCoins();
-  getCoin(String id);
-  getCoinChart(String id, String currency, String days);
+
+  Future<List<Coin>> getAllCoins();
+
+  Future<CoinDetail> getCoin(String id);
 }
