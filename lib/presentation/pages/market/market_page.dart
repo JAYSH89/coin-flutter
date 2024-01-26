@@ -16,5 +16,5 @@ class _MarketView extends StatelessWidget {
         children: [_buildBody()],
       );
 
-  Widget _buildBody() => const Text('This is the markets page.');
+  Widget _buildBody() => const Text('market page.');
 }
