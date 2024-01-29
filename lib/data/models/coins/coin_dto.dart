@@ -1,35 +1,83 @@
+import 'package:coin_flutter/data/models/mappable/date_time_hook.dart';
+import 'package:coin_flutter/data/models/mappable/double_hook.dart';
 import 'package:coin_flutter/domain/models/coins/coin.dart';
-import 'package:equatable/equatable.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
 part 'coin_dto.mapper.dart';
 
-class CoinDTO extends Equatable {
+@MappableClass()
+class CoinDTO with CoinDTOMappable {
   final String id;
+
   final String symbol;
+
   final String name;
+
   final String image;
-  final num currentPrice;
-  final num marketCap;
-  final num marketCapRank;
-  final num? fullyDilutedValuation;
-  final num totalVolume;
-  final num high24h;
-  final num low24h;
-  final num priceChange24h;
-  final num priceChangePercentage24h;
-  final num marketCapChange24h;
-  final num marketCapChangePercentage24h;
-  final num circulatingSupply;
-  final num? totalSupply;
-  final num? maxSupply;
-  final num ath;
-  final num athChangePercentage;
+
+  @MappableField(key: 'current_price', hook: DoubleHook())
+  final double currentPrice;
+
+  @MappableField(key: 'market_cap', hook: DoubleHook())
+  final double marketCap;
+
+  @MappableField(key: 'market_cap_rank', hook: DoubleHook())
+  final double marketCapRank;
+
+  @MappableField(key: 'fully_diluted_valuation', hook: DoubleHook())
+  final double? fullyDilutedValuation;
+
+  @MappableField(key: 'total_volume', hook: DoubleHook())
+  final double totalVolume;
+
+  @MappableField(key: 'high_24h', hook: DoubleHook())
+  final double high24h;
+
+  @MappableField(key: 'low_24h', hook: DoubleHook())
+  final double low24h;
+
+  @MappableField(key: 'price_change_24h', hook: DoubleHook())
+  final double priceChange24h;
+
+  @MappableField(key: 'price_change_percentage_24h', hook: DoubleHook())
+  final double priceChangePercentage24h;
+
+  @MappableField(key: 'market_cap_change_24h', hook: DoubleHook())
+  final double marketCapChange24h;
+
+  @MappableField(key: 'market_cap_change_percentage_24h', hook: DoubleHook())
+  final double marketCapChangePercentage24h;
+
+  @MappableField(key: 'circulating_supply', hook: DoubleHook())
+  final double circulatingSupply;
+
+  @MappableField(key: 'total_supply', hook: DoubleHook())
+  final double? totalSupply;
+
+  @MappableField(key: 'max_supply', hook: DoubleHook())
+  final double? maxSupply;
+
+  @MappableField(key: 'ath', hook: DoubleHook())
+  final double ath;
+
+  @MappableField(key: 'ath_change_percentage', hook: DoubleHook())
+  final double athChangePercentage;
+
+  @MappableField(key: 'ath_date', hook: DateTimeHook())
   final DateTime athDate;
-  final num atl;
-  final num atlChangePercentage;
+
+  @MappableField(key: 'atl', hook: DoubleHook())
+  final double atl;
+
+  @MappableField(key: 'atl_change_percentage', hook: DoubleHook())
+  final double atlChangePercentage;
+
+  @MappableField(key: 'atl_date', hook: DateTimeHook())
   final DateTime atlDate;
+
   final CoinRoiDTO? roi;
+
+  @MappableField(key: 'last_updated', hook: DateTimeHook())
   final DateTime lastUpdated;
 
   const CoinDTO({
@@ -61,63 +109,8 @@ class CoinDTO extends Equatable {
     required this.lastUpdated,
   });
 
-  factory CoinDTO.fromJson(Map<String, dynamic> json) => CoinDTO(
-        id: json['id'],
-        symbol: json['symbol'],
-        name: json['name'],
-        image: json['image'],
-        currentPrice: json['current_price'],
-        marketCap: json['market_cap'],
-        marketCapRank: json['market_cap_rank'],
-        fullyDilutedValuation: json['fully_diluted_valuation'],
-        totalVolume: json['total_volume'],
-        high24h: json['high_24h'],
-        low24h: json['low_24h'],
-        priceChange24h: json['price_change_24h'],
-        priceChangePercentage24h: json['price_change_percentage_24h'],
-        marketCapChange24h: json['market_cap_change_24h'],
-        marketCapChangePercentage24h: json['market_cap_change_percentage_24h'],
-        circulatingSupply: json['circulating_supply'],
-        totalSupply: json['total_supply'],
-        maxSupply: json['max_supply'],
-        ath: json['ath'],
-        athChangePercentage: json['ath_change_percentage'],
-        athDate: DateTime.parse(json['ath_date']),
-        atl: json['atl'],
-        atlChangePercentage: json['atl_change_percentage'],
-        atlDate: DateTime.parse(json['atl_date']),
-        roi: json['roi'] != null ? CoinRoiDTO.fromMap(json['roi']) : null,
-        lastUpdated: DateTime.parse(json['last_updated']),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'symbol': symbol,
-        'name': name,
-        'image': image,
-        'current_price': currentPrice,
-        'market_cap': marketCap,
-        'market_cap_rank': marketCapRank,
-        'fully_diluted_valuation': fullyDilutedValuation,
-        'total_volume': totalVolume,
-        'high_24h': high24h,
-        'low_24h': low24h,
-        'price_change_24h': priceChange24h,
-        'price_change_percentage_24h': priceChangePercentage24h,
-        'market_cap_change_24h': marketCapChange24h,
-        'market_cap_change_percentage_24h': marketCapChangePercentage24h,
-        'circulating_supply': circulatingSupply,
-        'total_supply': totalSupply,
-        'max_supply': maxSupply,
-        'ath': ath,
-        'ath_change_percentage': athChangePercentage,
-        'ath_date': athDate.toIso8601String(),
-        'atl': atl,
-        'atl_change_percentage': atlChangePercentage,
-        'atl_date': atlDate.toIso8601String(),
-        'roi': roi?.toMap(),
-        'last_updated': lastUpdated.toIso8601String(),
-      };
+  static const fromMap = CoinDTOMapper.fromMap;
+  static const fromJson = CoinDTOMapper.fromJson;
 
   @override
   List<Object?> get props => [
@@ -156,25 +149,25 @@ extension CoinDTOExtension on CoinDTO {
         symbol: symbol,
         name: name,
         image: image,
-        currentPrice: currentPrice.toDouble(),
-        marketCap: marketCap.toDouble(),
-        marketCapRank: marketCapRank.toDouble(),
-        fullyDilutedValuation: fullyDilutedValuation?.toDouble(),
-        totalVolume: totalVolume.toDouble(),
-        high24h: high24h.toDouble(),
-        low24h: low24h.toDouble(),
-        priceChange24h: priceChange24h.toDouble(),
-        priceChangePercentage24h: priceChangePercentage24h.toDouble(),
-        marketCapChange24h: marketCapChange24h.toDouble(),
-        marketCapChangePercentage24h: marketCapChangePercentage24h.toDouble(),
-        circulatingSupply: circulatingSupply.toDouble(),
-        totalSupply: totalSupply?.toDouble(),
-        maxSupply: maxSupply?.toDouble(),
-        ath: ath.toDouble(),
-        athChangePercentage: athChangePercentage.toDouble(),
+        currentPrice: currentPrice,
+        marketCap: marketCap,
+        marketCapRank: marketCapRank,
+        fullyDilutedValuation: fullyDilutedValuation,
+        totalVolume: totalVolume,
+        high24h: high24h,
+        low24h: low24h,
+        priceChange24h: priceChange24h,
+        priceChangePercentage24h: priceChangePercentage24h,
+        marketCapChange24h: marketCapChange24h,
+        marketCapChangePercentage24h: marketCapChangePercentage24h,
+        circulatingSupply: circulatingSupply,
+        totalSupply: totalSupply,
+        maxSupply: maxSupply,
+        ath: ath,
+        athChangePercentage: athChangePercentage,
         athDate: athDate,
-        atl: atl.toDouble(),
-        atlChangePercentage: atlChangePercentage.toDouble(),
+        atl: atl,
+        atlChangePercentage: atlChangePercentage,
         atlDate: atlDate,
         roi: roi?.toCoinRoi(),
         lastUpdated: lastUpdated,

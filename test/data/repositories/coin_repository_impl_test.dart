@@ -84,7 +84,7 @@ void main() {
       final jsonFile = readJson('helpers/dummy_data/dummy_coins_markets.json');
       final List<dynamic> jsonList = json.decode(jsonFile);
       final data = jsonList
-          .map((e) => CoinDTO.fromJson(e as Map<String, dynamic>))
+          .map((e) => CoinDTO.fromMap(e as Map<String, dynamic>))
           .toList();
 
       when(datasource.getAllCoins())

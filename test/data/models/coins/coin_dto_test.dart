@@ -82,7 +82,7 @@ void main() {
 
     // act
     Map<String, dynamic> first = jsonMap.first;
-    final result = CoinDTO.fromJson(first);
+    final result = CoinDTO.fromMap(first);
 
     // assert
     expect(result, equals(testCoin));
@@ -90,7 +90,7 @@ void main() {
 
   test('should return a json map containing correct data', () {
     // arrange
-    final result = testCoin.toJson();
+    final result = testCoin.toMap();
 
     // act + assert
     expect(result, equals(testJson));

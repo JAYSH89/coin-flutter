@@ -41,7 +41,7 @@ class CoinRemoteDataSourceImpl implements CoinRemoteDataSource {
         return coinJson as Map<String, dynamic>;
       }).toList();
 
-      return result.map((dto) => CoinDTO.fromJson(dto)).toList();
+      return result.map((dto) => CoinDTO.fromMap(dto)).toList();
     }
 
     throw ServerException();
