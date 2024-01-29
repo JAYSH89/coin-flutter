@@ -1,5 +1,8 @@
 import 'package:coin_flutter/domain/models/coins/coin.dart';
 import 'package:equatable/equatable.dart';
+import 'package:dart_mappable/dart_mappable.dart';
+
+part 'coin_dto.mapper.dart';
 
 class CoinDTO extends Equatable {
   final String id;
@@ -83,7 +86,7 @@ class CoinDTO extends Equatable {
         atl: json['atl'],
         atlChangePercentage: json['atl_change_percentage'],
         atlDate: DateTime.parse(json['atl_date']),
-        roi: json['roi'] != null ? CoinRoiDTO.fromJson(json['roi']) : null,
+        roi: json['roi'] != null ? CoinRoiDTO.fromMap(json['roi']) : null,
         lastUpdated: DateTime.parse(json['last_updated']),
       );
 
@@ -112,7 +115,7 @@ class CoinDTO extends Equatable {
         'atl': atl,
         'atl_change_percentage': atlChangePercentage,
         'atl_date': atlDate.toIso8601String(),
-        'roi': roi?.toJson(),
+        'roi': roi?.toMap(),
         'last_updated': lastUpdated.toIso8601String(),
       };
 
@@ -147,7 +150,7 @@ class CoinDTO extends Equatable {
       ];
 }
 
-extension CoinDTOMapper on CoinDTO {
+extension CoinDTOExtension on CoinDTO {
   Coin toCoin() => Coin(
         id: id,
         symbol: symbol,
@@ -178,38 +181,23 @@ extension CoinDTOMapper on CoinDTO {
       );
 }
 
-class CoinRoiDTO extends Equatable {
+@MappableClass()
+class CoinRoiDTO with CoinRoiDTOMappable {
   final double times;
   final String currency;
   final double percentage;
+
+  static const fromMap = CoinRoiDTOMapper.fromMap;
+  static const fromJson = CoinRoiDTOMapper.fromJson;
 
   const CoinRoiDTO({
     required this.times,
     required this.currency,
     required this.percentage,
   });
-
-  factory CoinRoiDTO.fromJson(Map<String, dynamic> json) => CoinRoiDTO(
-        times: json["times"],
-        currency: json["currency"],
-        percentage: json["percentage"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        'times': times,
-        'currency': currency,
-        'percentage': percentage,
-      };
-
-  @override
-  List<Object?> get props => [
-        times,
-        currency,
-        percentage,
-      ];
 }
 
-extension CoinRoiDTOMapper on CoinRoiDTO {
+extension CoinRoiDTOExtension on CoinRoiDTO {
   CoinRoi toCoinRoi() => CoinRoi(
         times: times,
         currency: currency,
