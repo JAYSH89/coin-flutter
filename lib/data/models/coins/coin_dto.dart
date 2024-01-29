@@ -80,6 +80,9 @@ class CoinDTO with CoinDTOMappable {
   @MappableField(key: 'last_updated', hook: DateTimeHook())
   final DateTime lastUpdated;
 
+  static const fromMap = CoinDTOMapper.fromMap;
+  static const fromJson = CoinDTOMapper.fromJson;
+
   const CoinDTO({
     required this.id,
     required this.symbol,
@@ -108,39 +111,6 @@ class CoinDTO with CoinDTOMappable {
     this.roi,
     required this.lastUpdated,
   });
-
-  static const fromMap = CoinDTOMapper.fromMap;
-  static const fromJson = CoinDTOMapper.fromJson;
-
-  @override
-  List<Object?> get props => [
-        id,
-        symbol,
-        name,
-        image,
-        currentPrice,
-        marketCap,
-        marketCapRank,
-        fullyDilutedValuation,
-        totalVolume,
-        high24h,
-        low24h,
-        priceChange24h,
-        priceChangePercentage24h,
-        marketCapChange24h,
-        marketCapChangePercentage24h,
-        circulatingSupply,
-        totalSupply,
-        maxSupply,
-        ath,
-        athChangePercentage,
-        athDate,
-        atl,
-        atlChangePercentage,
-        atlDate,
-        roi,
-        lastUpdated,
-      ];
 }
 
 extension CoinDTOExtension on CoinDTO {
