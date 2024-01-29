@@ -136,7 +136,7 @@ void main() {
       // arrange
       final jsonFile = readJson('helpers/dummy_data/dummy_coins_id.json');
       final Map<String, dynamic> jsonList = json.decode(jsonFile);
-      final data = CoinDetailDTO.fromJson(jsonList);
+      final data = CoinDetailDTO.fromMap(jsonList);
 
       when(datasource.getCoin(any))
           .thenAnswer((realInvocation) async => data);

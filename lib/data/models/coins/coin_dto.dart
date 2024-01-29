@@ -1,5 +1,6 @@
 import 'package:coin_flutter/data/models/mappable/date_time_hook.dart';
 import 'package:coin_flutter/data/models/mappable/double_hook.dart';
+import 'package:coin_flutter/data/models/mappable/int_hook.dart';
 import 'package:coin_flutter/domain/models/coins/coin.dart';
 import 'package:dart_mappable/dart_mappable.dart';
 
@@ -7,12 +8,16 @@ part 'coin_dto.mapper.dart';
 
 @MappableClass()
 class CoinDTO with CoinDTOMappable {
+  @MappableField(key: 'id')
   final String id;
 
+  @MappableField(key: 'symbol')
   final String symbol;
 
+  @MappableField(key: 'name')
   final String name;
 
+  @MappableField(key: 'image')
   final String image;
 
   @MappableField(key: 'current_price', hook: DoubleHook())
@@ -21,8 +26,8 @@ class CoinDTO with CoinDTOMappable {
   @MappableField(key: 'market_cap', hook: DoubleHook())
   final double marketCap;
 
-  @MappableField(key: 'market_cap_rank', hook: DoubleHook())
-  final double marketCapRank;
+  @MappableField(key: 'market_cap_rank', hook: IntHook())
+  final int marketCapRank;
 
   @MappableField(key: 'fully_diluted_valuation', hook: DoubleHook())
   final double? fullyDilutedValuation;
@@ -75,6 +80,7 @@ class CoinDTO with CoinDTOMappable {
   @MappableField(key: 'atl_date', hook: DateTimeHook())
   final DateTime atlDate;
 
+  @MappableField(key: 'roi')
   final CoinRoiDTO? roi;
 
   @MappableField(key: 'last_updated', hook: DateTimeHook())
@@ -147,7 +153,11 @@ extension CoinDTOExtension on CoinDTO {
 @MappableClass()
 class CoinRoiDTO with CoinRoiDTOMappable {
   final double times;
+
+  @MappableField(key: 'currency')
   final String currency;
+
+  @MappableField(key: 'percentage')
   final double percentage;
 
   static const fromMap = CoinRoiDTOMapper.fromMap;

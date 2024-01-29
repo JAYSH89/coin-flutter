@@ -11,17 +11,21 @@ void main() {
     symbol: "btc",
     name: "Bitcoin",
     webSlug: "bitcoin",
-    description: "description",
-    thumbImage:
-        "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400",
-    smallImage:
-        "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1696501400",
-    largeImage:
-        "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+    description: const CoinDetailDescriptionDTO(en: "description"),
+    image: const CoinDetailImageDTO(
+      thumbImage:
+          "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1696501400",
+      smallImage:
+          "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1696501400",
+      largeImage:
+          "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+    ),
     marketCapRank: 1,
-    currentPrice: const CoinDetailCurrentPriceDTO(
-      eur: 36674,
-      usd: 39830,
+    marketData: const CoinDetailMarketDataDTO(
+      currentPrice: CoinDetailCurrentPriceDTO(
+        eur: 36674,
+        usd: 39830,
+      ),
     ),
     lastUpdated: DateTime.parse("2024-01-24T00:29:50.869Z"),
   );
@@ -45,8 +49,8 @@ void main() {
     "market_cap_rank": 1,
     "market_data": {
       "current_price": {
-        "eur": 36674,
-        "usd": 39830,
+        "eur": 36674.0,
+        "usd": 39830.0,
       }
     },
     "last_updated": "2024-01-24T00:29:50.869Z",
@@ -59,7 +63,7 @@ void main() {
     );
 
     // act
-    final result = CoinDetailDTO.fromJson(jsonMap);
+    final result = CoinDetailDTO.fromMap(jsonMap);
 
     // assert
     expect(result, equals(testCoinDetail));
@@ -67,7 +71,7 @@ void main() {
 
   test('coin detail should return a json map successful', () {
     // arrange
-    final result = testCoinDetail.toJson();
+    final result = testCoinDetail.toMap();
 
     // assert
     expect(result, equals(expectedJson));

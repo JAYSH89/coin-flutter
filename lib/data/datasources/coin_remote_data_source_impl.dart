@@ -57,7 +57,7 @@ class CoinRemoteDataSourceImpl implements CoinRemoteDataSource {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseBody = json.decode(response.body);
-      return CoinDetailDTO.fromJson(responseBody);
+      return CoinDetailDTO.fromMap(responseBody);
     }
 
     throw ServerException();
