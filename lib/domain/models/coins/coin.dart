@@ -7,7 +7,7 @@ class Coin extends Equatable {
   final String image;
   final double currentPrice;
   final double marketCap;
-  final double marketCapRank;
+  final int marketCapRank;
   final double? fullyDilutedValuation;
   final double totalVolume;
   final double high24h;

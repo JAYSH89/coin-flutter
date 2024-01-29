@@ -1,18 +1,42 @@
+import 'package:coin_flutter/data/models/mappable/date_time_hook.dart';
+import 'package:coin_flutter/data/models/mappable/double_hook.dart';
+import 'package:coin_flutter/data/models/mappable/int_hook.dart';
 import 'package:coin_flutter/domain/models/coins/coin_detail.dart';
-import 'package:equatable/equatable.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-class CoinDetailDTO extends Equatable {
+part 'coin_detail_dto.mapper.dart';
+
+@MappableClass()
+class CoinDetailDTO with CoinDetailDTOMappable {
+  @MappableField(key: 'id')
   final String id;
+
+  @MappableField(key: 'symbol')
   final String symbol;
+
+  @MappableField(key: 'name')
   final String name;
+
+  @MappableField(key: 'web_slug')
   final String webSlug;
-  final String description;
-  final String thumbImage;
-  final String smallImage;
-  final String largeImage;
-  final num marketCapRank;
-  final CoinDetailCurrentPriceDTO currentPrice;
+
+  @MappableField(key: 'description')
+  final CoinDetailDescriptionDTO description;
+
+  @MappableField(key: 'image')
+  final CoinDetailImageDTO image;
+
+  @MappableField(key: 'market_cap_rank', hook: IntHook())
+  final int marketCapRank;
+
+  @MappableField(key: 'market_data')
+  final CoinDetailMarketDataDTO marketData;
+
+  @MappableField(key: 'last_updated', hook: DateTimeHook())
   final DateTime lastUpdated;
+
+  static const fromMap = CoinDetailDTOMapper.fromMap;
+  static const fromJson = CoinDetailDTOMapper.fromJson;
 
   const CoinDetailDTO({
     required this.id,
@@ -20,103 +44,87 @@ class CoinDetailDTO extends Equatable {
     required this.name,
     required this.webSlug,
     required this.description,
-    required this.thumbImage,
-    required this.smallImage,
-    required this.largeImage,
+    required this.image,
     required this.marketCapRank,
-    required this.currentPrice,
+    required this.marketData,
     required this.lastUpdated,
   });
-
-  factory CoinDetailDTO.fromJson(Map<String, dynamic> json) => CoinDetailDTO(
-        id: json['id'],
-        symbol: json['symbol'],
-        name: json['name'],
-        webSlug: json['web_slug'],
-        description: json['description']['en'],
-        thumbImage: json['image']['thumb'],
-        smallImage: json['image']['small'],
-        largeImage: json['image']['large'],
-        marketCapRank: json['market_cap_rank'],
-        currentPrice: CoinDetailCurrentPriceDTO.fromJson(json['market_data']),
-        lastUpdated: DateTime.parse(json['last_updated']),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'symbol': symbol,
-        'name': name,
-        'web_slug': webSlug,
-        'description': {
-          'en': description,
-        },
-        'image': {
-          'thumb': thumbImage,
-          'small': smallImage,
-          'large': largeImage,
-        },
-        'market_cap_rank': marketCapRank,
-        'market_data': currentPrice.toJson(),
-        'last_updated': lastUpdated.toIso8601String(),
-      };
-
-  @override
-  List<Object?> get props => [
-        id,
-        symbol,
-        name,
-        webSlug,
-        description,
-        thumbImage,
-        smallImage,
-        largeImage,
-        marketCapRank,
-        lastUpdated,
-      ];
 }
 
-extension CoinDetailDTOMapper on CoinDetailDTO {
+extension CoinDetailDTOExtension on CoinDetailDTO {
   CoinDetail toCoinDetail() => CoinDetail(
         id: id,
         symbol: symbol,
         name: name,
         webSlug: webSlug,
-        description: description,
-        thumbImage: thumbImage,
-        smallImage: smallImage,
-        largeImage: largeImage,
-        marketCapRank: marketCapRank.toInt(),
+        description: description.en,
+        thumbImage: image.thumbImage,
+        smallImage: image.smallImage,
+        largeImage: image.largeImage,
+        marketCapRank: marketCapRank,
         lastUpdated: lastUpdated,
       );
 }
 
-class CoinDetailCurrentPriceDTO extends Equatable {
-  final num eur;
-  final num usd;
+@MappableClass()
+class CoinDetailImageDTO with CoinDetailImageDTOMappable {
+  @MappableField(key: 'thumb')
+  final String thumbImage;
 
-  const CoinDetailCurrentPriceDTO({required this.eur, required this.usd});
+  @MappableField(key: 'small')
+  final String smallImage;
 
-  factory CoinDetailCurrentPriceDTO.fromJson(Map<String, dynamic> json) {
-    return CoinDetailCurrentPriceDTO(
-      eur: json['current_price']['eur'],
-      usd: json['current_price']['usd'],
-    );
-  }
+  @MappableField(key: 'large')
+  final String largeImage;
 
-  Map<String, dynamic> toJson() => {
-        'current_price': {
-          'eur': eur,
-          'usd': usd,
-        }
-      };
+  static const fromMap = CoinDetailImageDTOMapper.fromMap;
+  static const fromJson = CoinDetailImageDTOMapper.fromJson;
 
-  @override
-  List<Object?> get props => [eur, usd];
+  const CoinDetailImageDTO({
+    required this.thumbImage,
+    required this.smallImage,
+    required this.largeImage,
+  });
 }
 
-extension CoinDetailCurrentPriceDTOMapper on CoinDetailCurrentPriceDTO {
-  CoinDetailCurrentPrice toCoinDetailCurrentPrice() => CoinDetailCurrentPrice(
-        eur: eur.toDouble(),
-        usd: usd.toDouble(),
-      );
+@MappableClass()
+class CoinDetailDescriptionDTO with CoinDetailDescriptionDTOMappable {
+  @MappableField(key: 'en')
+  final String en;
+
+  static const fromMap = CoinDetailDescriptionDTOMapper.fromMap;
+  static const fromJson = CoinDetailDescriptionDTOMapper.fromJson;
+
+  const CoinDetailDescriptionDTO({required this.en});
+}
+
+@MappableClass()
+class CoinDetailMarketDataDTO with CoinDetailMarketDataDTOMappable {
+  @MappableField(key: 'current_price')
+  final CoinDetailCurrentPriceDTO currentPrice;
+
+  static const fromMap = CoinDetailMarketDataDTOMapper.fromMap;
+  static const fromJson = CoinDetailMarketDataDTOMapper.fromJson;
+
+  const CoinDetailMarketDataDTO({required this.currentPrice});
+}
+
+@MappableClass()
+class CoinDetailCurrentPriceDTO with CoinDetailCurrentPriceDTOMappable {
+  @MappableField(key: 'eur', hook: DoubleHook())
+  final double eur;
+
+  @MappableField(key: 'usd', hook: DoubleHook())
+  final double usd;
+
+  static const fromMap = CoinDetailCurrentPriceDTOMapper.fromMap;
+  static const fromJson = CoinDetailCurrentPriceDTOMapper.fromJson;
+
+  const CoinDetailCurrentPriceDTO({required this.eur, required this.usd});
+}
+
+extension CoinDetailCurrentPriceDTOExtension on CoinDetailCurrentPriceDTO {
+  CoinDetailCurrentPrice toCoinDetailCurrentPrice() {
+    return CoinDetailCurrentPrice(eur: eur, usd: usd);
+  }
 }
